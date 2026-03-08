@@ -35,26 +35,26 @@ cursor:pointer;
 
 .card-container{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:25px;
-margin-top:30px;
-max-width:1100px;
-margin-left:auto;
-margin-right:auto;
+max-width:1200px;
+margin:auto;
+padding:20px;
 }
 
 .card{
 background:white;
 padding:25px;
 border-radius:12px;
-box-shadow:0 8px 20px rgba(0,0,0,0.08);
-transition:all 0.3s ease;
-border:1px solid #eee;
+box-shadow:0 6px 20px rgba(0,0,0,0.08);
+transition:all 0.35s ease;
+text-align:center;
+cursor:pointer;
 }
 
 .card:hover{
-transform:translateY(-6px);
-box-shadow:0 12px 30px rgba(0,0,0,0.12);
+transform:translateY(-8px) scale(1.02);
+box-shadow:0 15px 35px rgba(0,0,0,0.15);
 }
 
 .card:hover{
@@ -74,10 +74,15 @@ font-size:14px;
 }
 
 .avatar{
-width:70px;
-height:70px;
+width:75px;
+height:75px;
 border-radius:50%;
 margin-bottom:15px;
+transition:transform 0.3s ease;
+}
+
+.card:hover .avatar{
+transform:scale(1.15);
 }
 
 @media print{
@@ -92,10 +97,54 @@ display:none;
 
 }
 
+
 .controls{
 display:flex;
 justify-content:center;
+align-items:center;
 gap:15px;
-margin-bottom:20px;
 flex-wrap:wrap;
+margin-bottom:30px;
+}
+
+.card{
+animation:fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+button{
+padding:10px 18px;
+border:none;
+border-radius:8px;
+background:#111827;
+color:white;
+cursor:pointer;
+transition:all 0.25s ease;
+}
+
+button:hover{
+background:#2563eb;
+transform:translateY(-2px);
+}
+
+@media (max-width:500px){
+
+h1{
+font-size:28px;
+}
+
+.search{
+width:90%;
+}
+
 }
