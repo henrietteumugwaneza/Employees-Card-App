@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";  
+import { useState, useEffect } from "react";
+import EmployeeCard from "./components/EmployeeCard";
+import SearchBar from "./components/SearchBar";
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+const [employees, setEmployees] = useState([])
+const [loading, setLoading] = useState(true)
+const [error, setError] = useState(null)
+const [search, setSearch] = useState("")
+
+useEffect(() => {
+
+fetch("https://jsonplaceholder.typicode.com/users")
+.then((response) => response.json())
+.then((data) => {
+setEmployees(data)
+setLoading(false)
+})
+.catch((err) => {
+setError("Failed to fetch employees")
+setLoading(false)
+})
+
+}, [])
+
+if (loading) return <h2>Loading...</h2>
+if (error) return <h2>{error}</h2>
+
+const filteredEmployees = employees.filter((emp)=>
+emp.name.toLowerCase().includes(search.toLowerCase()) ||
+emp.email.toLowerCase().includes(search.toLowerCase())
+)
+
+return (
+<div className="container">
+
+<h1>Employee Directory</h1>
+
+<SearchBar search={search} setSearch={setSearch}/>
+
+<div className="card-container">
+
+{filteredEmployees.map((employee)=>(
+<EmployeeCard key={employee.id} employee={employee}/>
+))}
+
+</div>
+
+</div>
+)
+
 }
 
 export default App
