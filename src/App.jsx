@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import EmployeeCard from "./components/EmployeeCard";
 import SearchBar from "./components/SearchBar";
@@ -11,7 +12,6 @@ function App() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
       .then((data) => {
@@ -22,7 +22,6 @@ function App() {
         setError("Failed to load employees");
         setLoading(false);
       });
-
   }, []);
 
   if (loading) return <h2>Loading employees...</h2>;
@@ -39,11 +38,12 @@ function App() {
 
       <h1>Employee Directory</h1>
 
-      <SearchBar search={search} setSearch={setSearch} />
-
-      <button onClick={() => window.print()}>
-        Print Cards
-      </button>
+      <div className="controls">
+        <SearchBar search={search} setSearch={setSearch}/>
+        <button onClick={() => window.print()}>
+          Print Cards
+        </button>
+      </div>
 
       <div className="card-container">
 

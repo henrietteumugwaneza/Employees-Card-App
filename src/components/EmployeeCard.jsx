@@ -1,22 +1,28 @@
+import React from "react"; 
 function EmployeeCard({ employee }) {
 
-  const { id, name, email, phone, website, company } = employee;
+const { id, name, email, phone, website, company } = employee
 
-  return (
+return (
 
-    <div className="card">
+<div className="card">
 
-      <h3>{name}</h3>
+<img
+src={`https://i.pravatar.cc/150?img=${id}`}
+alt="employee"
+className="avatar"
+/>
 
-      <p><strong>ID:</strong> {id}</p>
-      <p><strong>Email:</strong> {email}</p>
-      <p><strong>Phone:</strong> {phone}</p>
-      <p><strong>Website:</strong> {website}</p>
-      <p><strong>Company:</strong> {company.name}</p>
+<h3>{name}</h3>
 
-    </div>
+<p><strong>Email:</strong> {email}</p>
+<p><strong>Phone:</strong> {phone}</p>
+<p><strong>Website:</strong> {website}</p>
+<p><strong>Company:</strong> {company.name}</p>
 
-  );
+</div>
+
+)
 }
 
-export default EmployeeCard;
+export default EmployeeCard
